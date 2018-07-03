@@ -1,0 +1,97 @@
+<?php
+
+namespace DlCommunity\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * approval
+ *
+ * @ORM\Table(name="approval")
+ * @ORM\Entity(repositoryClass="DlCommunity\CoreBundle\Repository\approvalRepository")
+ */
+class approval
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $approval_id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type_approval", type="string", length=50, unique=true)
+     */
+    private $typeApproval;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descript_approval", type="text", nullable=true)
+     */
+    private $descriptApproval;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->approval_id;
+    }
+
+    /**
+     * Set typeApproval
+     *
+     * @param string $typeApproval
+     *
+     * @return approval
+     */
+    public function setTypeApproval($typeApproval)
+    {
+        $this->typeApproval = $typeApproval;
+
+        return $this;
+    }
+
+    /**
+     * Get typeApproval
+     *
+     * @return string
+     */
+    public function getTypeApproval()
+    {
+        return $this->typeApproval;
+    }
+
+    /**
+     * Set descriptApproval
+     *
+     * @param string $descriptApproval
+     *
+     * @return approval
+     */
+    public function setDescriptApproval($descriptApproval)
+    {
+        $this->descriptApproval = $descriptApproval;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptApproval
+     *
+     * @return string
+     */
+    public function getDescriptApproval()
+    {
+        return $this->descriptApproval;
+    }
+}
+

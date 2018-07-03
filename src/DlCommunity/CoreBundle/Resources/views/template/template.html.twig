@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block home %} Accueil {% endblock %}</title>
+        <link href="public/css/style.css" rel="stylesheet" /> 
+    </head>
+
+    <body>
+        <div class="body" >
+            <div class="tete" >
+                <div class="logo" > <a href="#"><img src="public/img/Fichier 1.png" alt="logo" height="34" width="141"> </a> </div>
+                <div class="recherche" > <input type="text" placeholder="recherche" > </div>
+            </div>
+            <div class="nav1" >
+                <div class="nav1Bbo1">
+                    <div class="profil" >
+                        <p>profil</p>
+                    </div>
+                    <div class="conect" >                                                                     
+                        <div class="accueille3" > <a href="#" class="a" >Connection</a></div>
+                        <div class="accueille3" > <a href="#" class="a" >Inscription</a></div>  
+                    </div>
+
+                </div>
+                <div class="nav1Bbo2">
+
+                    <div class="boutonvan1" > <a href="#" >Forum</a> </div>
+                    <div class="boutonvan1" > <a href="#" >Evenement</a></div>
+                    <div class="boutonvan1" > <a href="#" >News</a></div>                     
+                </div>
+            </div>
+            <div class="nav2" >  
+                <div class="bar1">
+
+                </div>
+
+                <div class="corpPrincipal" >
+
+                    {% block body %}
+                        <p>core page  </p>
+                    {% endblock %}                     
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </body>
+</html>
+
+

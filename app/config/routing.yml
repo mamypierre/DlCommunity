@@ -1,0 +1,3 @@
+dl_community_core:
+    resource: "@DlCommunityCoreBundle/Resources/config/routing.yml"
+    prefix:   /

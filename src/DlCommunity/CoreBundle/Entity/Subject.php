@@ -1,0 +1,204 @@
+<?php
+
+namespace DlCommunity\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use DlCommunity\CoreBundle\Entity\sub_category ;
+use DlCommunity\CoreBundle\Entity\User ;
+
+/**
+ * subject
+ *
+ * @ORM\Table(name="subject")
+ * @ORM\Entity(repositoryClass="DlCommunity\CoreBundle\Repository\SubjectRepository")
+ */
+class Subject
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="DlCommunity\CoreBundle\Entity\Forum_message", mappedBy="subject")
+     */
+    private $forum_messages;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Sub_category", cascade={"persist"}, inversedBy="subjects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sub_category;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\User", cascade={"persist"},)
+     */
+    private $user;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="subject_name", type="string", length=150)
+     */
+    private $subjectName;
+    
+    /**
+     *
+     * @var datetime
+     *  @ORM\Column(name="$subjectDate", type="datetime")
+     */
+    private  $subjectDate;
+    
+    /**
+     * constructeur initiation date today
+     */
+    public function __construct()
+  {
+   
+    $this->subjectDate = new \Datetime();
+  }
+    
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set subjectName
+     *
+     * @param string $subjectName
+     *
+     * @return subject
+     */
+    public function setSubjectName($subjectName)
+    {
+        $this->subjectName = $subjectName;
+
+        return $this;
+    }
+
+    /**
+     * Get subjectName
+     *
+     * @return string
+     */
+    public function getSubjectName()
+    {
+        return $this->subjectName;
+    }
+
+    /**
+     * Set subjectDate
+     *
+     * @param \DateTime $subjectDate
+     *
+     * @return subject
+     */
+    public function setSubjectDate($subjectDate)
+    {
+        $this->subjectDate = $subjectDate;
+
+        return $this;
+    }
+
+    /**
+     * Get subjectDate
+     *
+     * @return \DateTime
+     */
+    public function getSubjectDate()
+    {
+        return $this->subjectDate;
+    }
+
+    /**
+     * Set subCategory
+     *
+     * @param \DlCommunity\CoreBundle\Entity\sub_category $subCategory
+     *
+     * @return subject
+     */
+    public function setSubCategory( sub_category $subCategory)
+    {
+        $this->sub_category = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get subCategory
+     *
+     * @return \DlCommunity\CoreBundle\Entity\sub_category
+     */
+    public function getSubCategory()
+    {
+        return $this->sub_category;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \DlCommunity\CoreBundle\Entity\User $user
+     *
+     * @return Subject
+     */
+    public function setUser( User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \DlCommunity\CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add forumMessage
+     *
+     * @param \DlCommunity\CoreBundle\Entity\Forum_message $forumMessage
+     *
+     * @return Subject
+     */
+    public function addForumMessage(\DlCommunity\CoreBundle\Entity\Forum_message $forumMessage)
+    {
+        $this->forum_messages[] = $forumMessage;
+        $forumMessage->setSubject($this);
+        return $this;
+    }
+
+    /**
+     * Remove forumMessage
+     *
+     * @param \DlCommunity\CoreBundle\Entity\Forum_message $forumMessage
+     */
+    public function removeForumMessage(\DlCommunity\CoreBundle\Entity\Forum_message $forumMessage)
+    {
+        $this->forum_messages->removeElement($forumMessage);
+    }
+
+    /**
+     * Get forumMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getForumMessages()
+    {
+        return $this->forum_messages;
+    }
+}
