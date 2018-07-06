@@ -167,4 +167,38 @@ class Subject
     {
         return $this->user;
     }
+
+    /**
+     * Add forumMessage
+     *
+     * @param \DlCommunity\CoreBundle\Entity\Forum_message $forumMessage
+     *
+     * @return Subject
+     */
+    public function addForumMessage(\DlCommunity\CoreBundle\Entity\Forum_message $forumMessage)
+    {
+        $this->forum_messages[] = $forumMessage;
+        $forumMessage->setSubject($this);
+        return $this;
+    }
+
+    /**
+     * Remove forumMessage
+     *
+     * @param \DlCommunity\CoreBundle\Entity\Forum_message $forumMessage
+     */
+    public function removeForumMessage(\DlCommunity\CoreBundle\Entity\Forum_message $forumMessage)
+    {
+        $this->forum_messages->removeElement($forumMessage);
+    }
+
+    /**
+     * Get forumMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getForumMessages()
+    {
+        return $this->forum_messages;
+    }
 }

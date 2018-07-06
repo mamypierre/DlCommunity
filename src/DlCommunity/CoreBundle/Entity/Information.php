@@ -23,7 +23,7 @@ class Information
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information_status", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information_status")
      * @ORM\JoinColumn(nullable=false)
      */
     private $information_status;
@@ -194,29 +194,6 @@ class Information
         return $this->company;
     }
 
-    /**
-     * Set statusType
-     *
-     * @param \DlCommunity\CoreBundle\Entity\Status_type $Information_status
-     *
-     * @return Information
-     */
-    public function setStatusType(\DlCommunity\CoreBundle\Entity\Status_type $Information_status)
-    {
-        $this->Information_status = $Information_status;
-
-        return $this;
-    }
-
-    /**
-     * Get Information_status
-     *
-     * @return \DlCommunity\CoreBundle\Entity\Information_status
-     */
-    public function getInformation_status()
-    {
-        return $this->Information_status;
-    }
 
     /**
      * Set informationStatus

@@ -63,53 +63,6 @@ class Validation_type
         return $this->id;
     }
 
-    /**
-     * Set inscriptionListStart
-     *
-     * @param \DateTime $inscriptionListStart
-     *
-     * @return waiting_list
-     */
-    public function setInscriptionListStart($inscriptionListStart)
-    {
-        $this->inscriptionListStart = $inscriptionListStart;
-
-        return $this;
-    }
-
-    /**
-     * Get inscriptionListStart
-     *
-     * @return \DateTime
-     */
-    public function getInscriptionListStart()
-    {
-        return $this->inscriptionListStart;
-    }
-
-    /**
-     * Set inscriptionListEnd
-     *
-     * @param \DateTime $inscriptionListEnd
-     *
-     * @return waiting_list
-     */
-    public function setInscriptionListEnd($inscriptionListEnd)
-    {
-        $this->inscriptionListEnd = $inscriptionListEnd;
-
-        return $this;
-    }
-
-    /**
-     * Get inscriptionListEnd
-     *
-     * @return \DateTime
-     */
-    public function getInscriptionListEnd()
-    {
-        return $this->inscriptionListEnd;
-    }
 
     /**
      * Set validationType
