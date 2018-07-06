@@ -57,6 +57,7 @@ class User
     
      /**
      * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information", cascade={"persist"})
+      * @ORM\JoinColumn(nullable=false)
      */
     private $information;
     
@@ -72,6 +73,11 @@ class User
      */
     private $picture;
     
+    function __construct() {
+        $this->dateInscription = new \Datetime();
+    }
+
+
     /**
      * Get id
      *
@@ -209,7 +215,7 @@ class User
      *
      * @return User
      */
-    public function setInformation(\DlCommunity\CoreBundle\Entity\Information $information = null)
+    public function setInformation(\DlCommunity\CoreBundle\Entity\Information $information)
     {
         $this->information = $information;
 

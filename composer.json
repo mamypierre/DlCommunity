@@ -5,8 +5,8 @@
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle",
-            "DlCommunity\\CoreBundle\\": "src/DlCommunity/CoreBundle"
+            "DlCommunity\\CoreBundle\\": "src/DlCommunity/CoreBundle",
+            "DlCommunity\\ConectionInscriptionBundle\\":"src/DlCommunity/ConectionInscriptionBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
