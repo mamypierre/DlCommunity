@@ -1,0 +1,3 @@
+dl_community_forum_homepage:
+    path:     /
+    defaults: { _controller: DlCommunityForumBundle:Default:index }

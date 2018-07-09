@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "DlCommunity\\CoreBundle\\": "src/DlCommunity/CoreBundle",
-            "DlCommunity\\ConectionInscriptionBundle\\":"src/DlCommunity/ConectionInscriptionBundle"
+            "DlCommunity\\ConectionInscriptionBundle\\":"src/DlCommunity/ConectionInscriptionBundle",
+            "DlCommunity\\ForumBundle\\":"src/DlCommunity/ForumBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
