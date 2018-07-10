@@ -4,13 +4,13 @@
         <meta charset="utf-8" />
         <title>{% block home %} Accueil {% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <link href="public/css/style.css" rel="stylesheet" /> 
+        <link href={{asset('public/css/style.css')}} rel="stylesheet" /> 
     </head>
 
     <body>
         <div class="body" >
             <div class="tete" >
-                <div class="logo" > <a href="#"><img src="public/img/Fichier 1.png" alt="logo" height="34" width="141"> </a> </div>
+                <div class="logo" > <a href="{{path('dl_community_core_homepage')}}"><img src="{{asset('public/img/Fichier1.png')}}" alt="logo" height="34" width="141"> </a> </div>
                 <div class="recherche" > <input type="text" placeholder="recherche" > </div>
             </div>
             <div class="nav1" >
@@ -20,7 +20,7 @@
                     </div>
                     <div class="conect" >                                                                     
                         <div class="accueille3" > <a href="#" class="a" >Connection</a></div>
-                        <div class="accueille3" > <a href="#" class="a" >Inscription</a></div>  
+                        <div class="accueille3" > <a href="{{path('dl_community_inscription')}}" class="a" >Inscription</a></div>  
                     </div>
 
                 </div>
@@ -39,7 +39,7 @@
                 <div class="corpPrincipal" >
 
                     {% block body %}
-                        <p>core page  </p>
+                        <p>core page Home page </p>
                     {% endblock %}                     
 
                 </div>

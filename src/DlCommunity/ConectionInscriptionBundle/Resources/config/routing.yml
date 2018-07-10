@@ -1,3 +1,3 @@
-dl_community_conection_inscription_homepage:
-    path:     /
-    defaults: { _controller: DlCommunityConectionInscriptionBundle:Default:index }
+dl_community_inscription:
+    path:     /inscription
+    defaults: { _controller: DlCommunityConectionInscriptionBundle:Inscription:inscription }

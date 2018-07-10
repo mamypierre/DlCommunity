@@ -1,0 +1,10 @@
+{% extends "@DlCommunityCore/template/template.html.twig" %}
+{% block body %}
+
+    {{form_start(my_form , {'attr':{'novalidate':'novalidate'}})}}
+    
+    {{ form_rest(my_form) }}
+    <button type="submit">inscription</button>
+    {{form_end(my_form)}}
+    
+{% endblock %}

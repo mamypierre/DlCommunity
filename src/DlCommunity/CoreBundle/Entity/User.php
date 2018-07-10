@@ -62,7 +62,7 @@ class User
     private $information;
     
      /**
-     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Validation_type", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="DlCommunity\CoreBundle\Entity\Validation_type", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $validation_type;

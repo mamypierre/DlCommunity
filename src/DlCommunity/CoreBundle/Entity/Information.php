@@ -3,6 +3,7 @@
 namespace DlCommunity\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * information
@@ -23,8 +24,11 @@ class Information
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information_status")
+     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information_status",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Assert\Valid()
+     * 
      */
     private $information_status;
     
@@ -32,6 +36,8 @@ class Information
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255)
+     * @Assert\NotBlank(message="doit être rempli")
+     * @Assert\Length(min=3, minMessage = "trop court {{ limit }} ")
      */
     private $lastName;
 
@@ -39,20 +45,23 @@ class Information
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
+     * 
      */
     private $firstName;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="training_start", type="datetime", nullable=true)
+     * @ORM\Column(name="training_start", type="datetime")
+     * 
      */
     private $trainingStart;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="training_end", type="datetime", nullable=true)
+     * @ORM\Column(name="training_end", type="datetime")
+     * 
      */
     private $trainingEnd;
 

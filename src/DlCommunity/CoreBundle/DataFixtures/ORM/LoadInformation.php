@@ -43,7 +43,7 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
         //persistte pictures
         $manager->persist($image);
         
-        $validaionType = new \DlCommunity\CoreBundle\Entity\Validation_type();
+       /* $validaionType = new \DlCommunity\CoreBundle\Entity\Validation_type();
         $validaionType->setValidationType('Valider');
         $validaionType->setValidateDate(new \DateTime);
         
@@ -82,7 +82,7 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
             
             $manager->persist($user) ;
             
-        }
+        }*/
 
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();
