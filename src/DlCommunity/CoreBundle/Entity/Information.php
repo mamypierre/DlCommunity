@@ -46,6 +46,8 @@ class Information
      *
      * @ORM\Column(name="first_name", type="string", length=255)
      * 
+     * @Assert\NotBlank(message="doit être rempli")
+     * @Assert\Length(min=3, minMessage = "trop court {{ limit }} ")
      */
     private $firstName;
 

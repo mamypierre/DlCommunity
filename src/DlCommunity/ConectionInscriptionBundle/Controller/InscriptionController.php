@@ -13,24 +13,22 @@ class InscriptionController extends Controller {
         $manager = $this->getDoctrine()->getManager();
 
         $information = new Information();
+        $userType = new \DlCommunity\CoreBundle\Entity\User_type();
 
         $informationStatue = $manager->getRepository('DlCommunityCoreBundle:Information_status')
                 ->findOneBystatusType('Other');
 
-        $formulaire = $this->createForm(InformationType::class, $information, array('info_statu' => $informationStatue));
-        
+        $formulaireInfo = $this->createForm(InformationType::class, $information, array('info_statu' => $informationStatue));
+        $formUser_type = $this->createForm(\DlCommunity\CoreBundle\Form\User_typeType::class,$userType);
 
         if ($request->isMethod('POST')) {
 
-            $formulaire->handleRequest($request);
+            $formulaireInfo->handleRequest($request);
 
-            if ($formulaire->isValid()) {
+            if ($formulaireInfo->isValid()) {
 
                 $is_in_base = $manager->getRepository('DlCommunityCoreBundle:Information')->isINinformation($information);
-  
-                print_r($is_in_base[0]->getInformationStatus()->isDl());
                 
-
                 //$manager->persist($information);
                 // print_r($information);
                 // print_r($information->getInformationStatus());
@@ -41,7 +39,8 @@ class InscriptionController extends Controller {
         }
 
 
-        return $this->render('@DlCommunityConectionInscription/Default/inscription_form.html.twig', array('my_form' => $formulaire->createView()));
+        return $this->render('@DlCommunityConectionInscription/Default/inscription_form.html.twig', array(
+            'form_Info_stat' => $formulaireInfo->createView(),'form_useType'=>$formUser_type->createView()));
     }
 
 }
