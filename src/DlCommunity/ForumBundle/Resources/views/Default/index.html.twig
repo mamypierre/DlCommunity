@@ -2,5 +2,16 @@
 
 {% block home %} Forum {% endblock %}
 
-    {% block body %}<p> {{test}}  </p>{% endblock %}   
+    {% block body %}
+    
+    {% for teste in test %}
+{{teste.categoryName}} </br>
+{% endfor %}
+</br>
+    {% for SBCs in SBC %}
+{{SBCs.subCategoryName}} </br>
+
+    {% endfor %}
+
+    {% endblock %}   
 

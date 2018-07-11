@@ -12,12 +12,12 @@ class DefaultController extends Controller
         $repository = $this
             ->getDoctrine()
             ->getManager() 
-            ->getRepository('DlCommunityCoreBundle:Information_status');
+            ->getRepository('DlCommunityCoreBundle:Category');
 
         
-        $listStatus_type = $repository->findAll();
+        $listCategory = $repository->findAll();
         
-        print_r($listStatus_type);
+        //print_r($listStatus_type);
 
        /* foreach ($listPseudo as $pseudo) {
 
@@ -25,6 +25,14 @@ class DefaultController extends Controller
 
         }*/
 
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>'Forum'));
+        $repository = $this
+        ->getDoctrine()
+        ->getManager() 
+        ->getRepository('DlCommunityCoreBundle:Sub_Category');
+
+    
+    $listSub_Category = $repository->findAll();
+
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>$listCategory, 'SBC'=>$listSub_Category));
     }
 }
