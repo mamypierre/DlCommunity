@@ -12,12 +12,12 @@ class DefaultController extends Controller
         $repository = $this
             ->getDoctrine()
             ->getManager() 
-            ->getRepository('DlCommunityCoreBundle:User_type');
+            ->getRepository('DlCommunityCoreBundle:Information_status');
 
         
-        $listPseudo = $repository->findAll();
+        $listStatus_type = $repository->findAll();
         
-        print_r($listPseudo);
+        print_r($listStatus_type);
 
        /* foreach ($listPseudo as $pseudo) {
 
@@ -25,6 +25,6 @@ class DefaultController extends Controller
 
         }*/
 
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('tet'=>'mitoooooooo'));
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>'Forum'));
     }
 }

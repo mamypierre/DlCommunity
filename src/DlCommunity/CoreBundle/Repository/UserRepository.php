@@ -10,4 +10,7 @@ namespace DlCommunity\CoreBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    
+
 }
