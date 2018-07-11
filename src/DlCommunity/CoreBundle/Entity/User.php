@@ -3,6 +3,7 @@
 namespace DlCommunity\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user
@@ -25,6 +26,8 @@ class User
      * @var string
      *
      * @ORM\Column(name="pseudo", type="string", length=50, unique=true)
+     * 
+     * @Assert\NotBlank(message="doit être rempli")
      */
     private $pseudo;
 
@@ -32,6 +35,9 @@ class User
      * @var string
      *
      * @ORM\Column(name="password", type="text")
+     * 
+     * @Assert\NotBlank(message="doit être rempli")
+     * @Assert\Length(min=3, minMessage = "trop court {{ limit }} ")
      */
     private $password;
 
@@ -39,6 +45,12 @@ class User
      * @var string
      *
      * @ORM\Column(name="email_inscription", type="string", length=150, unique=true)
+     * 
+     * @Assert\NotBlank(message="doit être rempli")
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $emailInscription;
 
@@ -46,6 +58,9 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="date_inscription", type="datetime")
+     * 
+     * @Assert\NotBlank(message="doit être rempli")
+     * 
      */
     private $dateInscription;
     

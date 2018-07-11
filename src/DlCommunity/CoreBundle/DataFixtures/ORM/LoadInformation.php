@@ -24,7 +24,8 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($statuOther);
 
         //cretation Usertype
-
+        $User_typeWait = new User_type();
+        $User_typeWait->setUserType('waite');
         $User_typeBase = new User_type();
         $User_typeBase->setUserType('Base');
         $User_typeWebmaster = new User_type();
@@ -33,6 +34,7 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
         $User_typeAdmin->setUserType('Admin');
 
         // On la persiste
+        $manager->persist($User_typeWait);
         $manager->persist($User_typeBase);
         $manager->persist($User_typeWebmaster);
         $manager->persist($User_typeAdmin);

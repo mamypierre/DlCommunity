@@ -16,18 +16,10 @@ class proprioRepository extends \Doctrine\ORM\EntityRepository {
                 ->createQueryBuilder('a')
                 ->innerJoin('a.inverce', 'inverse')
                 ->addSelect('inverse')
-        ;
+                ->innerJoin('inverse.test', 'test1')
+                ->addSelect('test1');
 
-        $qb
-                ->where('inverse.attr2 = :id')
-                ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getResult()
-        ;
+        return $qb->getQuery()->getResult();
     }
-    public function test(){
-        return'test';
-    }
-
+    
 }

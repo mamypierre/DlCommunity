@@ -1,13 +1,13 @@
 {% extends "@DlCommunityCore/template/template.html.twig" %}
 {% block body %}
 
+    {{form_start(formulaireUser , {'attr':{'novalidate':'novalidate'}})}}
     {{form_start(form_Info_stat , {'attr':{'novalidate':'novalidate'}})}}
-    {{form_start(form_useType , {'attr':{'novalidate':'novalidate'}})}}
     
     {{ form_rest(form_Info_stat) }}
-    {{ form_rest(form_useType) }}
+    {{ form_rest(formulaireUser) }}
     <button type="submit">inscription</button>
-    {{form_end(form_useType)}}
     {{form_end(form_Info_stat)}}
+    {{form_end(formulaireUser)}}
     
 {% endblock %}

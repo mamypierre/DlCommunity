@@ -17,13 +17,7 @@ class InformationType extends AbstractType
         $builder->add('lastName', \Symfony\Component\Form\Extension\Core\Type\TextType::class)
                 ->add('firstName',  \Symfony\Component\Form\Extension\Core\Type\TextType::class )
                 ->add('trainingStart', \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class)
-                ->add('trainingEnd',\Symfony\Component\Form\Extension\Core\Type\DateTimeType::class )                
-                ->add('information_status', EntityType::class, array(
-                    'class'=>'DlCommunity\CoreBundle\Entity\Information_status',
-                    'choice_label'=>'statusType',
-                    'data'=>$options['info_statu'],
-                    'attr'=>array(
-                    'hidden' => FALSE)));
+                ->add('trainingEnd',\Symfony\Component\Form\Extension\Core\Type\DateTimeType::class );
     }/**
      * {@inheritdoc}
      */
@@ -33,7 +27,6 @@ class InformationType extends AbstractType
             'data_class' => 'DlCommunity\CoreBundle\Entity\Information'
         ));
         
-        $resolver->setRequired(array('info_statu'));
     }
 
     /**

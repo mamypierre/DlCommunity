@@ -4,34 +4,64 @@ namespace DlCommunity\ConectionInscriptionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DlCommunity\CoreBundle\Entity\Information;
+use DlCommunity\CoreBundle\Entity\User;
+use DlCommunity\CoreBundle\Entity\Validation_type;
 use DlCommunity\CoreBundle\Form\InformationType;
+use DlCommunity\CoreBundle\Form\UserType;
 
 class InscriptionController extends Controller {
 
     public function inscriptionAction(\Symfony\Component\HttpFoundation\Request $request) {
 
         $manager = $this->getDoctrine()->getManager();
-
+        
+        $userInfo = $manager->getRepository('DlCommunityCoreBundle:User')
+                                      ->getUser_information();
+        print_r($userInfo);
+        /*//objet a hidrater
         $information = new Information();
-        $userType = new \DlCommunity\CoreBundle\Entity\User_type();
-
-        $informationStatue = $manager->getRepository('DlCommunityCoreBundle:Information_status')
+        $user = new User();
+        //objet pardefaut
+        $informationStatueDefault = $manager->getRepository('DlCommunityCoreBundle:Information_status')
                 ->findOneBystatusType('Other');
-
-        $formulaireInfo = $this->createForm(InformationType::class, $information, array('info_statu' => $informationStatue));
-        $formUser_type = $this->createForm(\DlCommunity\CoreBundle\Form\User_typeType::class,$userType);
+        $userType_default = $manager->getRepository('DlCommunityCoreBundle:User_type')
+                ->findOneByuserType('waite');
+        $imageProfil_default = $manager->getRepository('DlCommunityCoreBundle:Picture')
+                ->findOneBytitle('image_profil');
+        $validationType = new Validation_type();
+            $validationType->setValidationType('encour');
+        
+        //creation formulaire
+        $formulaireInfo = $this->createForm(InformationType::class, $information);
+        $formulaireUser = $this->createForm(UserType::class, $user);
 
         if ($request->isMethod('POST')) {
 
             $formulaireInfo->handleRequest($request);
-
-            if ($formulaireInfo->isValid()) {
-
-                $is_in_base = $manager->getRepository('DlCommunityCoreBundle:Information')->isINinformation($information);
+            $formulaireUser->handleRequest($request);
+            if ($formulaireUser->isValid() && $formulaireInfo->isValid()) {
                 
-                //$manager->persist($information);
-                // print_r($information);
-                // print_r($information->getInformationStatus());
+                $isINinformation = $manager->getRepository('DlCommunityCoreBundle:Information')->isINinformation($information);
+                
+                if($isINinformation){
+                    
+                    print_r($isINinformation);
+                }
+                //set clé etranger information
+                $information->setInformationStatus($informationStatueDefault);
+                //set clé etranger user 
+                $user->setInformation($information)
+                     ->setPicture($imageProfil_default)
+                     ->setUserType($userType_default)
+                     ->setValidationType($validationType);
+                
+                
+               //print_r($user);
+                //print_r($information);
+                
+                //persiste               
+               //$manager->persist($user);
+                 //on commit
                 //$manager->flush();
 
                 return new \Symfony\Component\HttpFoundation\Response("c'est bien enregister");
@@ -40,7 +70,8 @@ class InscriptionController extends Controller {
 
 
         return $this->render('@DlCommunityConectionInscription/Default/inscription_form.html.twig', array(
-            'form_Info_stat' => $formulaireInfo->createView(),'form_useType'=>$formUser_type->createView()));
+            'form_Info_stat' => $formulaireInfo->createView(),'formulaireUser'=>$formulaireUser->createView())); */
+        return new \Symfony\Component\HttpFoundation\Response('') ;
     }
 
 }
