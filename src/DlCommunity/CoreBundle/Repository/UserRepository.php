@@ -10,25 +10,40 @@ namespace DlCommunity\CoreBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository {
 
-    public function getUser_information() {
+    public function getUser_findAll() {
 
-        $qb = $this->getQueryBuilderInfoStatus();
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function isINinformation(\DlCommunity\CoreBundle\Entity\Information $information) {
-        $lastMane = $information->getLastName();
-        $firstName = $information->getFirstName();
-        $trainingStart = $information->getTrainingStart();
-
-        $qb = $this->getQueryBuilderInfoStatus();
-        $qb->where('info.lastName = :lastName')->setParameter('lastName', $lastMane)
-                ->andWhere('info.firstName = :firstName')->setParameter('firstName', $firstName)
-                ->andWhere('info.trainingStart = :trainingStart')->setParameter('trainingStart', $trainingStart);
+        $qb = $this->getQueryBuilderAllUser();
 
         return $qb->getQuery()->getResult();
     }
+
+    public function isInUser(\DlCommunity\CoreBundle\Entity\Information $information) {
+        
+
+        $qb = $this->getQueryBuilderAllUser();
+        $qb->where('information = :info')->setParameter('info', $information);
+
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function isInUser_pseudo( $pseudo) {
+        
+
+        $qb = $this->getQueryBuilderAllUser();
+        $qb->where('user.pseudo = :pseudo')->setParameter('pseudo', $pseudo);
+
+        return $qb->getQuery()->getResult();
+    }
+    
+    public function isInUser_email( $email) {
+        
+
+        $qb = $this->getQueryBuilderAllUser();
+        $qb->where('user.emailInscription = :email')->setParameter('email', $email);
+
+        return $qb->getQuery()->getResult();
+    }
+    
 
     public function myFindAllDQL() {
         $query = $this->getEntityManager()->createQuery('SELECT a FROM DlCommunityCoreBundle:User a');
@@ -37,19 +52,19 @@ class UserRepository extends \Doctrine\ORM\EntityRepository {
         return $results;
     }
 
-    private function getQueryBuilderInfoStatus() {
+    private function getQueryBuilderAllUser() {
 
         $qb = $this
                 ->createQueryBuilder('user')
-                ->innerJoin('user.user_type', 'user_type')
+                ->leftJoin('user.user_type', 'user_type')
                 ->addSelect('user_type')
-                ->innerJoin('user.information', 'information')
+                ->leftJoin('user.information', 'information')
                 ->addSelect('information')
-                ->innerJoin('information.information_status', 'statu')
+                ->leftJoin('information.information_status', 'statu')
                 ->addSelect('statu')
-                ->innerJoin('user.validation_type', 'validation_type')
+                ->leftJoin('user.validation_type', 'validation_type')
                 ->addSelect('validation_type')
-                ->innerJoin('user.picture', 'picture')
+                ->leftJoin('user.picture', 'picture')
                 ->addSelect('picture');
 
         return $qb;
