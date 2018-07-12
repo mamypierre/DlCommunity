@@ -26,13 +26,56 @@ class DefaultController extends Controller
         }*/
 
         $repository = $this
-        ->getDoctrine()
-        ->getManager() 
-        ->getRepository('DlCommunityCoreBundle:Sub_Category');
+            ->getDoctrine()
+            ->getManager() 
+            ->getRepository('DlCommunityCoreBundle:Sub_Category');
 
     
     $listSub_Category = $repository->findAll();
 
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>$listCategory, 'SBC'=>$listSub_Category));
+        $repository = $this
+            ->getDoctrine()
+            ->getManager() 
+            ->getRepository('DlCommunityCoreBundle:Subject');
+
+    
+    $listSubject = $repository->findAll();
+
+    
+
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>$listCategory));
     }
+
+    public function subcatAction() {
+
+        $repository = $this
+        ->getDoctrine()
+        ->getManager() 
+        ->getRepository('DlCommunityCoreBundle:Sub_Category');
+
+
+    $listSub_Category = $repository->findAll();
+
+    return $this->render('@DlCommunityForum/Default/SubCategory.html.twig',array('SBC'=>$listSub_Category));
+
+
+    }
+
+    public function sujetAction() {
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager() 
+            ->getRepository('DlCommunityCoreBundle:Subject');
+
+    
+    $listSubject = $repository->findAll();
+
+    return $this->render('@DlCommunityForum/Default/Sujet.html.twig',array('SUB'=>$listSubject));
+
+
+    }
+
 }
+
+

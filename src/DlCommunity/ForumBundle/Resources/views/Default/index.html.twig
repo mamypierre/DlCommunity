@@ -3,15 +3,20 @@
 {% block home %} Forum {% endblock %}
 
     {% block body %}
+        
     
+      <div class="corpConten">
+  
     {% for teste in test %}
-{{teste.categoryName}} </br>
-{% endfor %}
-</br>
-    {% for SBCs in SBC %}
-{{SBCs.subCategoryName}} </br>
-
+    {{teste.categoryName}} </br>
+        <div class="categoryName"> <a class="nonCategory" href="{{ path('') }}"> Categorie  </a>
     {% endfor %}
+    </br>
+
+  
+    
+        </div>
+                   
 
     {% endblock %}   
 

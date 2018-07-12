@@ -1,0 +1,12 @@
+{% extends '@DlCommunityCore/template/template.html.twig' %} 
+
+{% block home %} Forum {% endblock %}
+
+    {% block body %}
+        
+    {% for SUBs in SUB %}
+    {{SUBs.subjectName}} </br>
+    {% endfor %}
+
+    {% endblock %}   
+
