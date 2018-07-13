@@ -2,21 +2,18 @@
 
 {% block home %} Forum {% endblock %}
 
-    {% block body %}
+    {% block body %}÷
         
     
       <div class="corpConten">
   
     {% for teste in test %}
     {{teste.categoryName}} </br>
-        <div class="categoryName"> <a class="nonCategory" href="{{ path('') }}"> Categorie  </a>
+        <div class="categoryName"> <a class="nonCategory" href="{{ path('Default/SubCategory') }}"> Categorie  </a>
     {% endfor %}
     </br>
 
-  
-    
         </div>
                    
-
     {% endblock %}   
 
