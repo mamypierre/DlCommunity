@@ -43,7 +43,7 @@ class DefaultController extends Controller
 
     
 
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('test'=>$listCategory));
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory));
     }
 
     public function subcatAction() {

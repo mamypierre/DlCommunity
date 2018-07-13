@@ -2,18 +2,22 @@
 
 {% block home %} Forum {% endblock %}
 
-    {% block body %}÷
-        
-    
-      <div class="corpConten">
-  
-    {% for teste in test %}
-    {{teste.categoryName}} </br>
-        <div class="categoryName"> <a class="nonCategory" href="{{ path('Default/SubCategory') }}"> Categorie  </a>
-    {% endfor %}
-    </br>
 
-        </div>
+
+    {% block body %}
+
+     <section class="container">
+            <div class="col4 col6-s">
+            </br>
+                {% for categs in categ %}
+                <div class="corpConten" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ categs.categoryName}}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> 
+    </section>
                    
     {% endblock %}   
 
