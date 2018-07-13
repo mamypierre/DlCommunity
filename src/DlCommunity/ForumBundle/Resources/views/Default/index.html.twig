@@ -14,10 +14,13 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ categs.categoryName}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">
-                        {% for SBCs in SBC %}
-                            {{SBCs.subCategoryName}}
-                        {% endfor %}
-                    </h6>
+                           
+                            {% for SBCs in SBC %} 
+                                {% if categs.id == SBCs.category_id %}
+                                {{SBCs.subCategoryName}}
+                                {% endif %}
+                            {% endfor %}
+                            </h6>
                         </div>
                     </div>
                     {% endfor %}
@@ -25,4 +28,3 @@
         </section>
                    
     {% endblock %}   
-

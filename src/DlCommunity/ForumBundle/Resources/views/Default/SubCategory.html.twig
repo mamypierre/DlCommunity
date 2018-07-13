@@ -1,0 +1,13 @@
+{% extends '@DlCommunityCore/template/template.html.twig' %} 
+
+{% block home %} Forum {% endblock %}
+
+    {% block body %}
+
+    {% for SBCs in SBC %}
+    {{SBCs.subCategoryName}} </br>
+    {% endfor %}
+    </br>
+
+
+    {% endblock %}   
