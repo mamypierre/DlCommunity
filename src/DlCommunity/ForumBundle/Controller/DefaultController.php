@@ -16,14 +16,7 @@ class DefaultController extends Controller
 
         
         $listCategory = $repository->findAll();
-        
-        //print_r($listStatus_type);
 
-       /* foreach ($listPseudo as $pseudo) {
-
-            echo $pseudo->getContent();
-
-        }*/
 
         $repository = $this
             ->getDoctrine()
@@ -33,17 +26,9 @@ class DefaultController extends Controller
     
     $listSub_Category = $repository->findAll();
 
-        $repository = $this
-            ->getDoctrine()
-            ->getManager() 
-            ->getRepository('DlCommunityCoreBundle:Subject');
-
-    
-    $listSubject = $repository->findAll();
-
     
 
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory));
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory, 'SBC'=>$listSub_Category));
     }
 
     public function subcatAction() {
