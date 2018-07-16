@@ -18,17 +18,8 @@ class DefaultController extends Controller
         $listCategory = $repository->findAll();
 
 
-        $repository = $this
-            ->getDoctrine()
-            ->getManager() 
-            ->getRepository('DlCommunityCoreBundle:Sub_Category');
 
-    
-    $listSub_Category = $repository->findAll();
-
-    //print_r ($listCategory[0]->getId());
-
-        return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory, 'SBC'=>$listSub_Category));
+        return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory));
     }
 
     public function subcatAction() {

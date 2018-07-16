@@ -13,10 +13,10 @@
                             <h5 class="card-title">{{ categs.categoryName}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">
                            
-                            {% for SBCs in SBC %} 
-                                {% if categs.id == SBCs.getCategory.getId %}
+                            {% for SBCs in categs.getSubCategorys %}                                 
                                 {{SBCs.getSubCategoryName}}
-                                {% endif %}
+                                <a href="{{ path('dl_community_forum_homepage') }}"> {{SBCs.getSubCategoryName}} </a>
+
                             {% endfor %}
                             </h6>
                         </div>
