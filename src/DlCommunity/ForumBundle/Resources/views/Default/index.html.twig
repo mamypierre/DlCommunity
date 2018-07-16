@@ -2,8 +2,6 @@
 
 {% block home %} Forum {% endblock %}
 
-
-
     {% block body %}
 
         <section class="container">
@@ -16,8 +14,8 @@
                             <h6 class="card-subtitle mb-2 text-muted">
                            
                             {% for SBCs in SBC %} 
-                                {% if categs.id == SBCs.category_id %}
-                                {{SBCs.subCategoryName}}
+                                {% if categs.id == SBCs.getCategory.getId %}
+                                {{SBCs.getSubCategoryName}}
                                 {% endif %}
                             {% endfor %}
                             </h6>

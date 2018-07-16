@@ -26,7 +26,7 @@ class DefaultController extends Controller
     
     $listSub_Category = $repository->findAll();
 
-    
+    //print_r ($listCategory[0]->getId());
 
         return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory, 'SBC'=>$listSub_Category));
     }
