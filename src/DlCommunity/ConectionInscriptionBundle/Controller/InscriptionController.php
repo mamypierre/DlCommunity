@@ -5,15 +5,28 @@ namespace DlCommunity\ConectionInscriptionBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DlCommunity\CoreBundle\Entity\Information;
 use DlCommunity\CoreBundle\Entity\User;
-use DlCommunity\CoreBundle\Entity\Validation_type;
 use DlCommunity\CoreBundle\Form\InformationType;
 use DlCommunity\CoreBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class InscriptionController extends Controller {
 
-    public function inscriptionAction(\Symfony\Component\HttpFoundation\Request $request) {
+class InscriptionController extends Controller implements ContainerAwareInterface {
+    
+    /**
+     * @var ContainerInterface
+     */
+    public $container;
 
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    public function inscriptionAction(\Symfony\Component\HttpFoundation\Request $request ) {
+        
         $manager = $this->getDoctrine()->getManager();
 
         //objet a hydrater
@@ -40,8 +53,16 @@ class InscriptionController extends Controller {
             $pseudo = $repositoryUser->isInUser_pseudo($user->getPseudo());
             $email = $repositoryUser->isInUser_email($user->getEmailInscription()) ;
             
+            
             if ($formulaireUser->isValid() && $formulaireInfo->isValid() && !$pseudo && !$email) {
-
+                
+                //encodage pasword
+                               
+                $encoder = $this->container->get('security.password_encoder');
+                $password = $encoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                
+                //verifier si l'information existe déja
                 $isINinformation = $manager->getRepository('DlCommunityCoreBundle:Information')->isINinformation($information);
 
                 if ($isINinformation) {
@@ -50,57 +71,50 @@ class InscriptionController extends Controller {
                             ->isInUser($isINinformation[0]);
                     //test existance user
                     if ($userInfo) {
-                        if ($userInfo[0]->getValidationType()->getValidationType() == 'valider') {
-                            // print('veuillez vous connecter');
-                            return new \Symfony\Component\HttpFoundation\Response("veuillez vous connecter");
-                        } elseif ($userInfo[0]->getValidationType()->getValidationType() == 'encour') {
-                            //print('veuillez attendre la validation de votre inscription');
-                            return new \Symfony\Component\HttpFoundation\Response("veuillez attendre la validation de votre inscription");
-                        } else {
-                            //echo'desoler votre inscription est non valider';
-                            return new \Symfony\Component\HttpFoundation\Response("desolé votre inscription est non validé");
-                        }
+                        $this->messageSession('isUser', 'connecter vous avec votre identifiant');
+                        return $this->redirectToRoute('login');
                     } else {
-                        $this->inserUser($isINinformation[0],'Base', 'valider' , $imageProfil_default, $manager , $user);
-                        return new \Symfony\Component\HttpFoundation\Response("c'est bien enregistrer");
+                        //print_r($isINinformation[0]);
+                        if($isINinformation[0]->getInformationStatus()->getStatusType()=='DlAfpa'||$isINinformation[0]->getInformationStatus()->getStatusType()=='CDI'){
+                            $user->setRoles(array('ROLE_AFPA'));
+                            
+                        }
+                        
+                        $this->inserUser($isINinformation[0], $imageProfil_default, $manager , $user);
+                        $this->messageSession('success', 'felicitation vous pouvez vous enregistre');
+                        return $this->redirectToRoute('login');
                     }
                     //print_r($isINinformation);
                 } else {
                     //set clé etranger information
-                    $this->inserUser($information, 'waite', 'encour' , $imageProfil_default, $manager, $user);
-                    return new \Symfony\Component\HttpFoundation\Response("c'est bien enregistrer");
+                    $this->inserUser($information, $imageProfil_default, $manager, $user);
+                    $this->messageSession('success', 'felicitation vous pouvez vous enregistre');
+                        return $this->redirectToRoute('login');
                 }
             }
         }
-            $session = new Session();
+            
             if($pseudo){
-                $session->getFlashBag()->add('error', 'pseudo existe deja');
+                $this->messageSession('error', 'pseudo existe deja');
             }
             if($email){
-                $session->getFlashBag()->add('error', 'email existe deja');
-            }
-
+                $this->messageSession('error', 'email existe deja');
+            }        
+          
         return $this->render('@DlCommunityConectionInscription/Default/inscription_form.html.twig', array(
                     'form_Info_stat' => $formulaireInfo->createView(), 'formulaireUser' => $formulaireUser->createView()));
     }
 
-    public function inserUser($information, $userType, $valType, $imageProfil_default ,$manager, $user) {
+    public function inserUser($information, $imageProfil_default ,$manager, $user) {
         
         $informationStatueDefault = $manager->getRepository('DlCommunityCoreBundle:Information_status')
                 ->findOneBystatusType('Other');
         
-        $userType_default = $manager->getRepository('DlCommunityCoreBundle:User_type')
-                ->findOneByuserType($userType);
-        
-        $validationType = new Validation_type();
-        $validationType->setValidationType($valType);
         
         $information->setInformationStatus($informationStatueDefault);
         //set clé etranger user 
         $user->setInformation($information)
-                ->setPicture($imageProfil_default)
-                ->setUserType($userType_default)
-                ->setValidationType($validationType);
+                ->setPicture($imageProfil_default);
 
         //persiste               
         $manager->persist($user);
@@ -108,6 +122,10 @@ class InscriptionController extends Controller {
         $manager->flush();
 
         
+    }
+    public function messageSession($attribu, $message){
+        $session = new Session();
+        $session->getFlashBag()->add($attribu, $message);
     }
 
 }

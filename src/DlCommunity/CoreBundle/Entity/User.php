@@ -4,15 +4,15 @@ namespace DlCommunity\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * user
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="DlCommunity\CoreBundle\Repository\UserRepository")
  */
-class User
-{
+class User implements UserInterface {
+
     /**
      * @var int
      *
@@ -63,43 +63,37 @@ class User
      * 
      */
     private $dateInscription;
+
     
-     /**
-     * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\User_type", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+
+    /**
+     * @ORM\Column(name="roles", type="array")
      */
-    private $user_type;
-    
-     /**
+    private $roles = array();
+
+    /**
      * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Information", cascade={"persist"})
-      * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $information;
-    
-     /**
-     * @ORM\OneToOne(targetEntity="DlCommunity\CoreBundle\Entity\Validation_type", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $validation_type;
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="DlCommunity\CoreBundle\Entity\Picture", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $picture;
-    
+
     function __construct() {
         $this->dateInscription = new \Datetime();
+        $this->roles = array('ROLE_USER');
     }
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -110,8 +104,7 @@ class User
      *
      * @return user
      */
-    public function setPseudo($pseudo)
-    {
+    public function setPseudo($pseudo) {
         $this->pseudo = $pseudo;
 
         return $this;
@@ -122,8 +115,7 @@ class User
      *
      * @return string
      */
-    public function getPseudo()
-    {
+    public function getPseudo() {
         return $this->pseudo;
     }
 
@@ -134,8 +126,7 @@ class User
      *
      * @return user
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -146,8 +137,7 @@ class User
      *
      * @return string
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -158,8 +148,7 @@ class User
      *
      * @return user
      */
-    public function setEmailInscription($emailInscription)
-    {
+    public function setEmailInscription($emailInscription) {
         $this->emailInscription = $emailInscription;
 
         return $this;
@@ -170,8 +159,7 @@ class User
      *
      * @return string
      */
-    public function getEmailInscription()
-    {
+    public function getEmailInscription() {
         return $this->emailInscription;
     }
 
@@ -182,8 +170,7 @@ class User
      *
      * @return user
      */
-    public function setDateInscription($dateInscription)
-    {
+    public function setDateInscription($dateInscription) {
         $this->dateInscription = $dateInscription;
 
         return $this;
@@ -194,34 +181,11 @@ class User
      *
      * @return \DateTime
      */
-    public function getDateInscription()
-    {
+    public function getDateInscription() {
         return $this->dateInscription;
     }
 
-    /**
-     * Set userType
-     *
-     * @param \DlCommunity\CoreBundle\Entity\User_type $userType
-     *
-     * @return User
-     */
-    public function setUserType(\DlCommunity\CoreBundle\Entity\User_type $userType)
-    {
-        $this->user_type = $userType;
 
-        return $this;
-    }
-
-    /**
-     * Get userType
-     *
-     * @return \DlCommunity\CoreBundle\Entity\User_type
-     */
-    public function getUserType()
-    {
-        return $this->user_type;
-    }
 
     /**
      * Set information
@@ -230,8 +194,7 @@ class User
      *
      * @return User
      */
-    public function setInformation(\DlCommunity\CoreBundle\Entity\Information $information)
-    {
+    public function setInformation(\DlCommunity\CoreBundle\Entity\Information $information) {
         $this->information = $information;
 
         return $this;
@@ -242,34 +205,11 @@ class User
      *
      * @return \DlCommunity\CoreBundle\Entity\Information
      */
-    public function getInformation()
-    {
+    public function getInformation() {
         return $this->information;
     }
 
-    /**
-     * Set validationType
-     *
-     * @param \DlCommunity\CoreBundle\Entity\Validation_type $validationType
-     *
-     * @return User
-     */
-    public function setValidationType(\DlCommunity\CoreBundle\Entity\Validation_type $validationType)
-    {
-        $this->validation_type = $validationType;
 
-        return $this;
-    }
-
-    /**
-     * Get validationType
-     *
-     * @return \DlCommunity\CoreBundle\Entity\Validation_type
-     */
-    public function getValidationType()
-    {
-        return $this->validation_type;
-    }
 
     /**
      * Set picture
@@ -278,8 +218,7 @@ class User
      *
      * @return User
      */
-    public function setPicture(\DlCommunity\CoreBundle\Entity\Picture $picture)
-    {
+    public function setPicture(\DlCommunity\CoreBundle\Entity\Picture $picture) {
         $this->picture = $picture;
 
         return $this;
@@ -290,8 +229,65 @@ class User
      *
      * @return \DlCommunity\CoreBundle\Entity\Picture
      */
-    public function getPicture()
-    {
+    public function getPicture() {
         return $this->picture;
     }
+
+    public function eraseCredentials() {
+        
+    }
+
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+       // $this->salt = $salt;
+
+        //return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function getUsername(): string {
+        return $this->pseudo;
+    }
+
 }

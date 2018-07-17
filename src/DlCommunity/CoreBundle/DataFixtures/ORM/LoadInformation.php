@@ -3,13 +3,25 @@
 namespace DlCommunity\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use DlCommunity\CoreBundle\Entity\User_type;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadInformation extends AbstractFixture implements OrderedFixtureInterface {
+class LoadInformation extends AbstractFixture implements ContainerAwareInterface {
 
-    public function load(ObjectManager $manager) {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    
+
+    public function load(ObjectManager $manager ) {
 
         // creation de statue information
         $statuDl = new \DlCommunity\CoreBundle\Entity\Information_status();
@@ -23,36 +35,13 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($statuDl);
         $manager->persist($statuOther);
 
-        //cretation Usertype
-        $User_typeWait = new User_type();
-        $User_typeWait->setUserType('waite');
-        $User_typeBase = new User_type();
-        $User_typeBase->setUserType('Base');
-        $User_typeWebmaster = new User_type();
-        $User_typeWebmaster->setUserType('Webmaster');
-        $User_typeAdmin = new User_type();
-        $User_typeAdmin->setUserType('Admin');
-
-        // On la persiste
-        $manager->persist($User_typeWait);
-        $manager->persist($User_typeBase);
-        $manager->persist($User_typeWebmaster);
-        $manager->persist($User_typeAdmin);
-        //creation image
         $image = new \DlCommunity\CoreBundle\Entity\Picture();
         $image->setTitle('image_profil');
         $image->setUrl('public/img/image_profil.png');
         //persistte pictures
         $manager->persist($image);
-        
-       /* $validaionType = new \DlCommunity\CoreBundle\Entity\Validation_type();
-        $validaionType->setValidationType('Valider');
-        $validaionType->setValidateDate(new \DateTime);
-        
-        //persiste validation 
-        $manager->persist($validaionType);
-        
-        
+
+
 
         $informations = array(array('last_name' => 'pierre', 'first_name' => 'MAMY'),
             array('last_name' => 'Judith', 'first_name' => 'FRANCOIS'),
@@ -67,24 +56,26 @@ class LoadInformation extends AbstractFixture implements OrderedFixtureInterface
 
             $informationObject->setFirstName($information['first_name']);
             $informationObject->setLastName($information['last_name']);
+            $informationObject->setTrainingEnd(new \DateTime());
+            $informationObject->setTrainingStart(new \DateTime());
             $informationObject->setInformationStatus($statuDl);
 
             $manager->persist($informationObject);
-            
+
             $user = new \DlCommunity\CoreBundle\Entity\User();
-            
-            $user->setEmailInscription('admin'.$information['last_name'].'@Dlcomunity.com');
-            $user->setPassword(password_hash("123456789", PASSWORD_DEFAULT));
+
+            $user->setEmailInscription('admin' . $information['last_name'] . '@Dlcomunity.com');
+            $encoder = $this->container->get('security.password_encoder');
+            $password = $encoder->encodePassword($user, '123456789');
+            $user->setPassword($password);
             $user->setPicture($image);
             $user->setPseudo($information['last_name']);
-            $user->setUserType($User_typeAdmin);
-            $user->setValidationType($validaionType);
+            $user->setRoles(array('ROLE_USER'));
             $user->setInformation($informationObject);
             //persiste user
-            
-            $manager->persist($user) ;
-            
-        }*/
+
+            $manager->persist($user);
+        }
 
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();
