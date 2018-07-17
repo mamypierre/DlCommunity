@@ -3,6 +3,7 @@
 namespace DlCommunity\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,10 @@ class SubjectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('subjectName')->add('subjectDate')->add('sub_category')->add('user');
+        $builder
+            ->add('subjectName', TextType::class)
+            ->add('sub_category', Sub_categoryType::class)
+            ->add('user', UserType::class);
     }/**
      * {@inheritdoc}
      */

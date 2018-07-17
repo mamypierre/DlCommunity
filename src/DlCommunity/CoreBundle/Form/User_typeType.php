@@ -2,30 +2,26 @@
 
 namespace DlCommunity\CoreBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class Sub_categoryType extends AbstractType
+class User_typeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('subCategoryName',TextType::class)
-            ->add('subCategoryDescription',TextType::class)
-            ->add('category',CategoryType::class)
-            ->add('picture', PictureType::class);
+        $builder->add('userType',TextType::class);
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DlCommunity\CoreBundle\Entity\Sub_category'
+            'data_class' => 'DlCommunity\CoreBundle\Entity\User_type'
         ));
     }
 
@@ -34,7 +30,7 @@ class Sub_categoryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dlcommunity_corebundle_sub_category';
+        return 'dlcommunity_corebundle_user_type';
     }
 
 

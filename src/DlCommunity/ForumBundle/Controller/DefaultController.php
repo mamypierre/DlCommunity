@@ -2,10 +2,13 @@
 
 namespace DlCommunity\ForumBundle\Controller;
 
+use DlCommunity\CoreBundle\Entity\Subject;
+use DlCommunity\CoreBundle\Form\SubjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
+
     public function indexAction()
     {
 
@@ -32,7 +35,15 @@ class DefaultController extends Controller
     
     $listSubject = $repository->findAll();
 
-    return $this->render('@DlCommunityForum/Default/Sujet.html.twig',array('SUB'=>$listSubject));
+
+
+        $sujet= new Subject();
+
+        $form = $this -> createform(SubjectType::class, $sujet);
+
+        $formview = $form->createView();
+
+    return $this->render('@DlCommunityForum/Default/Sujet.html.twig',array('SUB'=>$listSubject, 'form'=>$formview));
 
 
     }
@@ -53,6 +64,14 @@ class DefaultController extends Controller
     }
 
 
+    Public function addAction()
+    {
+
+
+
+        return $this->render('@DlCommunityForum/Default/Sujet.html.twig',array('form'=>$formview));
+
+    }
 }
 
 

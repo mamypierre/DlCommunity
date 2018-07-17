@@ -3,22 +3,43 @@
 {% block home %} Forum {% endblock %}
 
     {% block body %}
-        
-{% for SUBs in SUB %}
-                    <div class="corpConten" style="width: 15rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{SUBs.subjectName}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                            {% for Mess in SUBs.getForumMessages %}                                 
-                                 <a href="{{ path('dl_community_forum_message') }}">{{Mess.getForumMessageName}} </a>
+        <div class="row">
+
+            {% for SUBs in SUB %}
+                <div class="corpConten" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{SUBs.subjectName}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {% for Mess in SUBs.getForumMessages %}
+                                <a href="{{ path('dl_community_forum_message') }}">{{Mess.getForumMessageName}} </a>
                             {% endfor %}
-                            </h6>
-                        </div>
+                        </h6>
                     </div>
-                    {% endfor %}
+                </div>
+            {% endfor %}
+
+
+
+            <div class="col-md-12">
+                <div class="container">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+
+        </div>
 
 
 
 
-    {% endblock %}   
+
+
+
+    {% endblock %}
+
+
+
 
