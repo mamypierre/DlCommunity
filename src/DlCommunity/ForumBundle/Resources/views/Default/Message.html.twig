@@ -1,0 +1,18 @@
+{% extends '@DlCommunityCore/template/template.html.twig' %} 
+
+{% block home %} Forum {% endblock %}
+
+    {% block body %}
+
+    {% for MesS in Mess %}
+        <div class="corpConten" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title">
+                {{MesS.forumMessageName}} </br> </br>
+                {{MesS.forumMessageContent}} </br>
+                </h5>
+            </div>
+        </div>
+
+    {% endfor %}
+    {% endblock %}   

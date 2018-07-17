@@ -22,21 +22,6 @@ class DefaultController extends Controller
         return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory));
     }
 
-    public function subcatAction() {
-
-        $repository = $this
-        ->getDoctrine()
-        ->getManager() 
-        ->getRepository('DlCommunityCoreBundle:Sub_Category');
-
-
-    $listSub_Category = $repository->findAll();
-
-    return $this->render('@DlCommunityForum/Default/SubCategory.html.twig',array('SBC'=>$listSub_Category));
-
-
-    }
-
     public function sujetAction() {
 
         $repository = $this
@@ -51,6 +36,22 @@ class DefaultController extends Controller
 
 
     }
+
+    public function messageAction() {
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager() 
+            ->getRepository('DlCommunityCoreBundle:Forum_message');
+
+    
+    $listForum_message = $repository->findAll();
+
+    return $this->render('@DlCommunityForum/Default/Message.html.twig',array('Mess'=>$listForum_message));
+
+
+    }
+
 
 }
 

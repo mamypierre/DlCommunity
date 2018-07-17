@@ -11,17 +11,6 @@ namespace DlCommunity\CoreBundle\Repository;
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getAll()
-    {
-
-        return $this -> getEntityManager ()
-            ->createQuery (
-             'SELECT * FROM DlCommunity\CoreBundle\Entity\Category *'
-            ) 
-            -> getResult()
-            ;
-
-    }
-
 }
+
  

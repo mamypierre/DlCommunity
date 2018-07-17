@@ -12,11 +12,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ categs.categoryName}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">
-                           
                             {% for SBCs in categs.getSubCategorys %}                                 
-                                {{SBCs.getSubCategoryName}}
-                                <a href="{{ path('dl_community_forum_homepage') }}"> {{SBCs.getSubCategoryName}} </a>
-
+                                <a href="{{ path('dl_community_forum_Subjet') }}"> {{SBCs.getSubCategoryName}} </a>
                             {% endfor %}
                             </h6>
                         </div>

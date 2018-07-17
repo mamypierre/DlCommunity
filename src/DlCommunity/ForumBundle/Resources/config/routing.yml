@@ -1,3 +1,11 @@
 dl_community_forum_homepage:
-    path:     /
+    path:     /forum
     defaults: { _controller: DlCommunityForumBundle:Default:index }
+
+dl_community_forum_Subjet:
+    path:     /subject
+    defaults: { _controller: DlCommunityForumBundle:Default:sujet }
+
+dl_community_forum_message:
+    path:     /message
+    defaults: { _controller: DlCommunityForumBundle:Default:message }
