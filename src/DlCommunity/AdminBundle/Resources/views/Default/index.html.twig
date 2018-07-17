@@ -1,1 +1,10 @@
-Hello World!
+{% extends "@DlCommunityCore/template/template.html.twig" %}
+{% block home %} Administrateur {% endblock %}
+{% block body %}
+    <title>Ajout d'une News</title>
+    {{ form_start (form)}}
+    {{ form_widget(form) }}
+    <button type="submit">Ajouter!</button>
+    {{ form_end(form) }}
+
+{% endblock %}
