@@ -1,26 +1,26 @@
 <?php
 
-namespace DlCommunity\ConectionInscriptionBundle\Form;
+namespace DlCommunity\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PictureType extends AbstractType
+class Validation_typeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('url')->add('pictureDescript');
+        $builder->add('validation_type')->add('creation_date')->add('validate_date');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DlCommunity\CoreBundle\Entity\Picture'
+            'data_class' => 'DlCommunity\CoreBundle\Entity\Validation_type'
         ));
     }
 
@@ -29,7 +29,7 @@ class PictureType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dlcommunity_corebundle_picture';
+        return 'dlcommunity_corebundle_validation_type';
     }
 
 

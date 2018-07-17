@@ -24,7 +24,7 @@ class Validation_type
     /**
      * @var string
      *
-     * @ORM\Column(name="validation_type", type="string", length=50, unique=true)
+     * @ORM\Column(name="validation_type", type="string", length=50)
      */
     private $validation_type ;
 

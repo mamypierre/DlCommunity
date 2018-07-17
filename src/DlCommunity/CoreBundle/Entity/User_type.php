@@ -3,6 +3,7 @@
 namespace DlCommunity\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user_type
@@ -25,6 +26,9 @@ class User_type
      * @var string
      *
      * @ORM\Column(name="user_type", type="string", length=150, unique=true)
+     * 
+     * @Assert\Length(min=3, minMessage = "trop court {{ limit }}", max=150,  maxMessage="doit etre inferieur {{ limit }} ")
+     * 
      */
     private $userType;
 

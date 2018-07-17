@@ -3,6 +3,7 @@
 namespace DlCommunity\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * information_status
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="information_status")
  * @ORM\Entity(repositoryClass="DlCommunity\CoreBundle\Repository\Information_statusRepository")
  */
-class Information_status
-{
+class Information_status {
+
     /**
      * @var int
      *
@@ -23,8 +24,14 @@ class Information_status
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="status_type", type="string", length=100, unique=true)
+     * 
+     * @Assert\NotBlank(message="doit être rempli")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 250,
+     * )
      */
     private $statusType;
 
@@ -35,14 +42,12 @@ class Information_status
      */
     private $statusDescript;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,8 +58,7 @@ class Information_status
      *
      * @return information_status
      */
-    public function setStatusType($statusType)
-    {
+    public function setStatusType($statusType) {
         $this->statusType = $statusType;
 
         return $this;
@@ -65,8 +69,7 @@ class Information_status
      *
      * @return string
      */
-    public function getStatusType()
-    {
+    public function getStatusType() {
         return $this->statusType;
     }
 
@@ -77,8 +80,7 @@ class Information_status
      *
      * @return information_status
      */
-    public function setStatusDescript($statusDescript)
-    {
+    public function setStatusDescript($statusDescript) {
         $this->statusDescript = $statusDescript;
 
         return $this;
@@ -89,8 +91,23 @@ class Information_status
      *
      * @return string
      */
-    public function getStatusDescript()
-    {
+    public function getStatusDescript() {
         return $this->statusDescript;
     }
+
+    public function isDl() {
+        if (strcasecmp($this->statusType, 'DlAfpa')==0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    public function isCdi() {
+        if (strcasecmp($this->statusType, "CDI")==0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
 }

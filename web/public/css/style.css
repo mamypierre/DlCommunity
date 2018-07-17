@@ -61,6 +61,10 @@ body{
     height: 60%;
     border-bottom: 2px solid #999999;
 }
+.profil p {
+    color: #cccccc;
+    text-decoration: none
+}
 .conect{
     width: 90% ;
     height: 40%;
