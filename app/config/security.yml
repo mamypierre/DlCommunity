@@ -26,12 +26,12 @@ security:
         pattern:   ^/login$
         anonymous: true # On autorise alors les anonymes sur ce pare-feu
     main_inscription:
-        pattern:   ^/dl_community_inscription$
+        pattern:   ^/inscription$
         anonymous: true # On autorise alors les anonymes sur ce pare-feu
     main:
       provider:     main
       pattern:      ^/
-      anonymous:    true
+      anonymous:    false
       form_login:
         login_path: login
         check_path: login_check
