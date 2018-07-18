@@ -3,13 +3,9 @@ dl_community_forum_homepage:
     defaults: { _controller: DlCommunityForumBundle:Default:index }
 
 dl_community_forum_Subjet:
-    path:     /subject
+    path:     /subject/{idCate}
     defaults: { _controller: DlCommunityForumBundle:Default:sujet }
 
 dl_community_forum_message:
     path:     /message
     defaults: { _controller: DlCommunityForumBundle:Default:message }
-
-dl_community_forum_add:
-    path:     /add
-    defaults: { _controller: DlCommunityForumBundle:Default:add }

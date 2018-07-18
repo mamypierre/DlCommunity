@@ -2,6 +2,7 @@
 
 namespace DlCommunity\CoreBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,8 +17,17 @@ class SubjectType extends AbstractType
     {
         $builder
             ->add('subjectName', TextType::class)
-            ->add('sub_category', Sub_categoryType::class)
-            ->add('user', UserType::class);
+            ->add('sub_category', EntityType::class, array
+            ('class'=>'DlCommunity\CoreBundle\Entity\Sub_category',
+                'choice_label'=>'subCategoryName',
+                'expanded'=>false,'multiple'=>false,
+                'label'=>'Sous-Catégorie :'))
+            ->add('user', EntityType::class, array
+            ('class'=>'DlCommunity\CoreBundle\Entity\User',
+                'choice_label'=>'pseudo',
+                'expanded'=>false,'multiple'=>false,
+                'label'=>'Pseudo :'));
+    }/**;
     }/**
      * {@inheritdoc}
      */

@@ -13,7 +13,12 @@ class Forum_messageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('forumMessageName')->add('forumMessageContent')->add('messageForumDate')->add('subject')->add('user');
+        $builder
+            ->add('forumMessageName')
+            ->add('forumMessageContent')
+            ->add('messageForumDate')
+            ->add('subject')
+            ->add('user');
     }/**
      * {@inheritdoc}
      */

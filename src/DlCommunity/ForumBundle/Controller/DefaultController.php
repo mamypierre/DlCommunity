@@ -4,7 +4,9 @@ namespace DlCommunity\ForumBundle\Controller;
 
 use DlCommunity\CoreBundle\Entity\Subject;
 use DlCommunity\CoreBundle\Form\SubjectType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -25,7 +27,7 @@ class DefaultController extends Controller
         return $this->render('@DlCommunityForum/Default/index.html.twig',array('categ'=>$listCategory));
     }
 
-    public function sujetAction() {
+    public function sujetAction(Request $request) {
 
         $repository = $this
             ->getDoctrine()
@@ -40,6 +42,21 @@ class DefaultController extends Controller
         $sujet= new Subject();
 
         $form = $this -> createform(SubjectType::class, $sujet);
+
+        $form->handleRequest($request);
+
+         if($form->isSubmitted())
+         {
+
+             $em=$this->getDoctrine()->getManager();
+
+             $em->persist($sujet);
+
+             $em->flush();
+
+             return new Response('Sujet Crée');
+
+         }
 
         $formview = $form->createView();
 
@@ -63,15 +80,6 @@ class DefaultController extends Controller
 
     }
 
-
-    Public function addAction()
-    {
-
-
-
-        return $this->render('@DlCommunityForum/Default/Sujet.html.twig',array('form'=>$formview));
-
-    }
 }
 
 
