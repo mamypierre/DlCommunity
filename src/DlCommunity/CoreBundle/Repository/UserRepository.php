@@ -56,16 +56,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository {
 
         $qb = $this
                 ->createQueryBuilder('user')
-                ->leftJoin('user.user_type', 'user_type')
-                ->addSelect('user_type')
                 ->leftJoin('user.information', 'information')
-                ->addSelect('information')
-                ->leftJoin('information.information_status', 'statu')
-                ->addSelect('statu')
-                ->leftJoin('user.validation_type', 'validation_type')
-                ->addSelect('validation_type')
-                ->leftJoin('user.picture', 'picture')
-                ->addSelect('picture');
+                ->addSelect('information');
 
         return $qb;
     }

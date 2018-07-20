@@ -16,11 +16,17 @@
             <div class="nav1" >
                 <div class="nav1Bbo1">
                     <div class="profil" >
-                        <p>profil</p>
+                        {% if app.user != null   %}
+                            <p>Bonjour {{ app.user.username }} </p>
+                        {% endif %}
                     </div>
-                    <div class="conect" >                                                                     
-                        <div class="accueille3" > <a href="#" class="a" >Connection</a></div>
-                        <div class="accueille3" > <a href="{{path('dl_community_inscription')}}" class="a" >Inscription</a></div>  
+                    <div class="conect" >
+                        {% if app.user == null   %}
+                            <div class="accueille3" > <a href="{{path('login')}}" class="a" >Connection</a></div>
+                            <div class="accueille3" > <a href="{{path('dl_community_inscription')}}" class="a" >Inscription</a></div>
+                        {% else %}
+                            <div class="accueille3" > <a href="{{path('logout')}}" class="a" >Deconnection</a></div>
+                        {% endif %}
                     </div>
 
                 </div>
@@ -28,7 +34,10 @@
 
                     <div class="boutonvan1" > <a href="#" >Forum</a> </div>
                     <div class="boutonvan1" > <a href="#" >Evenement</a></div>
-                    <div class="boutonvan1" > <a href="#" >News</a></div>                     
+                    <div class="boutonvan1" > <a href="#" >News</a></div> 
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="boutonvan1" > <a href="#" >admin</a></div>
+                        {% endif %}
                 </div>
             </div>
             <div class="nav2" >  
@@ -46,12 +55,12 @@
             </div>
 
         </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
     </body>
-    
+
 </html>
 
 

@@ -1,3 +1,1 @@
-dl_community_inscription:
-    path:     /inscription
-    defaults: { _controller: DlCommunityConectionInscriptionBundle:Inscription:inscription }
+
