@@ -1,7 +1,17 @@
+
+dl_community_admin:
+    resource: "@DlCommunityAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+dl_community_conection_inscription:
+    resource: "@DlCommunityConectionInscriptionBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 dl_community_inscription:
     path: /inscription
     defaults:
         _controller: DlCommunityConectionInscriptionBundle:Inscription:inscription
+
 
 dl_community_core:
     resource: "@DlCommunityCoreBundle/Resources/config/routing.yml"
