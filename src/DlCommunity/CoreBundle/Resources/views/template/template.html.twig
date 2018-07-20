@@ -32,11 +32,11 @@
                 </div>
                 <div class="nav1Bbo2">
 
-                    <div class="boutonvan1" > <a href="#" >Forum</a> </div>
+                    <div class="boutonvan1" > <a href="{{path('dl_community_category')}}" >Forum</a> </div>
                     <div class="boutonvan1" > <a href="#" >Evenement</a></div>
                     <div class="boutonvan1" > <a href="#" >News</a></div> 
                     {% if is_granted('ROLE_ADMIN') %}
-                        <div class="boutonvan1" > <a href="#" >admin</a></div>
+                        <div class="boutonvan1" > <a href="{{path('dl_community_admin_homepage')}}" >admin</a></div>
                         {% endif %}
                 </div>
             </div>

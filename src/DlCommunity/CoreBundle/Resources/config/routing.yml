@@ -1,3 +1,11 @@
 dl_community_core_homepage:
     path:     /
     defaults: { _controller: DlCommunityCoreBundle:Default:index }
+    
+dl_community_category:
+    path:     /category
+    defaults: { _controller: DlCommunityCoreBundle:categorySoucate:index }
+
+dl_community_sujet:
+    path:     /sujet/{id}
+    defaults: { _controller: DlCommunityCoreBundle:Sujet:index }

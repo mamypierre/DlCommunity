@@ -1,0 +1,18 @@
+{% extends "@DlCommunityCore/template/template.html.twig" %}
+{% block home %} category {% endblock %}
+{% block body %}
+    <h2>category</h2>
+    {% for subjet in subjets %}
+        <div class="titre"> 
+            <h2> {{subjet.getSubCategory.getSubCategoryName }} </h2>
+        </div>
+
+
+        <div class="sujet">   
+            <a href="#"> 
+
+            </a>           
+        </div> 
+       
+    {% endfor %}
+{% endblock %}

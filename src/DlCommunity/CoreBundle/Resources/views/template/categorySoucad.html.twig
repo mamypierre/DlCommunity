@@ -1,0 +1,19 @@
+{% extends "@DlCommunityCore/template/template.html.twig" %}
+{% block home %} category {% endblock %}
+{% block body %}
+    <h2>category</h2>
+
+    {% for gategory in gategorys %}
+        <div class="titre" >  {{gategory.categoryName }} </div>
+        {% for souCate in gategory.getSubCategorys %}
+            
+            <div class="corpConten" > 
+                
+                <div class="nomSoucategory">   <a class="nonCategory" href="{{path('dl_community_sujet', { 'id': souCate.id })}}"> {{souCate.subCategoryName }}</a>                                               
+                    
+                </div>
+                <div class="descriptionSoucat"> <a class="descriptionCategory"href="{{path('dl_community_sujet', { 'id': souCate.id })}}" > {{souCate.SubCategoryDescription}}</a> </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
